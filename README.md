@@ -461,11 +461,11 @@
   <div class="products">
 
     <div class="card">
-      <img src="https://uploads.onecompiler.io/454bxpyrs/1790381126635/Sabonete-abacaxi.jpg" alt="Sabonete Líquido Brisa Abacaxi">
-      <h3>Sabonete Líquido Brisa Abacaxi 1L</h3>
+      <img src="https://uploads.onecompiler.io/454bxpyrs/1790381126635/Sabonete-abacaxi.jpg" alt="Sabonete 1L">
+      <h3>Sabonete 1L</h3>
       <p>Sabonete líquido</p>
       <span class="price">R$ 10,00</span>
-      <button class="btn" onclick="add('Sabonete Líquido Brisa Abacaxi 1L',10)">Adicionar</button>
+      <button class="btn" onclick="add('Sabonete 1L',10)">Adicionar</button>
     </div>
 
     <div class="card">
@@ -665,6 +665,18 @@
     Total: R$ <span id="total">0,00</span>
   </div>
 
+  <label for="pagamento" style="display:block; color:#c2185b; font-weight:600; font-size:13px; margin:8px 0 6px;">
+    💳 Forma de pagamento
+  </label>
+
+  <select id="pagamento" style="width:100%; padding:11px; border:1px solid #ddd; border-radius:12px; background:#fff; color:#333; font-family:'Poppins',sans-serif; font-size:13px; margin-bottom:10px;">
+    <option value="">Selecione uma forma de pagamento</option>
+    <option value="Pix">Pix</option>
+    <option value="Dinheiro">Dinheiro</option>
+    <option value="Cartão de crédito">Cartão de crédito</option>
+    <option value="Cartão de débito">Cartão de débito</option>
+  </select>
+
   <button class="finalizar" onclick="zap()">
     💚 Finalizar pelo WhatsApp
   </button>
@@ -757,6 +769,14 @@
       return;
     }
 
+    const pagamento = document.getElementById("pagamento").value;
+
+    if (!pagamento) {
+      alert("Escolha a forma de pagamento antes de finalizar a compra.");
+      document.getElementById("pagamento").focus();
+      return;
+    }
+
     let mensagem = "Olá! Quero fazer um pedido na Rose Mimo 🌹%0A%0A";
 
     let total = 0;
@@ -770,6 +790,7 @@
     });
 
     mensagem += `%0ATotal: R$ ${total.toFixed(2).replace('.', ',')}`;
+    mensagem += `%0AForma de pagamento: ${pagamento}`;
 
     const numero = "5585987005202";
 
